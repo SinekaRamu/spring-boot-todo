@@ -4,6 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+
+### user ###
+file
+
 ### STS ###
 .apt_generated
 .classpath
