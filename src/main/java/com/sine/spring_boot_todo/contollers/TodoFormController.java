@@ -10,7 +10,6 @@ import com.sine.spring_boot_todo.models.TodoItem;
 import com.sine.spring_boot_todo.repositories.TodoitemRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class TodoFormController {
@@ -19,6 +18,11 @@ public class TodoFormController {
 
     @Autowired
     private TodoitemRepository todoitemRepository;
+
+    @GetMapping("/create-todo")
+    public String createTodo(TodoItem todoItem) {
+        return "add-todo-item";
+    }
 
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {

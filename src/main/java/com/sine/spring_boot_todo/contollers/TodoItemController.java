@@ -20,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping
@@ -36,6 +37,16 @@ public class TodoItemController {
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("todoItems", todoitemRepository.findAll());
         return modelAndView;
+    }
+
+    @PostMapping("/todo")
+    public String createTodo(@Valid TodoItem todoItem, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "add-todo-item";
+        }
+        todoItem.setCreateDate(Instant.now());
+        todoitemRepository.save(todoItem);
+        return "redirect:/";
     }
 
     @PostMapping("/todo/{id}")
